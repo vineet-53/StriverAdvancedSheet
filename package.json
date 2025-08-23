@@ -1,10 +1,13 @@
 {
+  "homepage" : "https://vineet-53.github.io/StriverAdvancedSheet",
   "name": "striver-clone",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "predeploy" : "npm run build",
+    "deploy" :"gh-pages -d build",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -13,6 +16,7 @@
     "@tailwindcss/vite": "^4.1.12",
     "axios": "^1.11.0",
     "flowbite-react": "^0.12.7",
+    "gh-pages": "^6.3.0",
     "lucide-react": "^0.541.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
