@@ -1,0 +1,48 @@
+[
+    {
+        "step_no": 1,
+        "step_title": "Learn the basics",
+        "sub_steps": [
+            {
+                "sub_step_no": 1,
+                "sub_step_title": "Things to Know in C++/Java/Python or any language",
+                "topics": [
+                    {
+                        "id": "srinpttpt",
+                        "step_no": 1,
+                        "sub_step_no": 1,
+                        "sl_no": 1,
+                        "step_title": "Learn the basics",
+                        "sub_step_title": "Things to Know in C++/Java/Python or any language",
+                        "question_title": "User Input / Output",
+                        "post_link": "https://takeuforward.org/c/c-basic-input-output/",
+                        "yt_link": "https://youtu.be/EAR7De6Goz4?t=250",
+                        "gfg_link": "https://practice.geeksforgeeks.org/problems/search-query-auto-complete/0?category%5B%5D=Strings&category%5B%5D=Strings&problemStatus=unsolved&difficulty%5B%5D=2&page=1&query=category%5B%5DStringsproblemStatusunsolveddifficulty%5B%5D2page1category%5B%5DStr",
+                        "cs_link": "https://www.codingninjas.com/studio/problems/find-character-case_58513?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf",
+                        "lc_link": null,
+                        "company_tags": null,
+                        "difficulty": 0,
+                        "ques_topic": "[{\"value\":\"basics\",\"label\":\"Introduction to DSA\"}]"
+                    },
+                    {
+                        "id": "dttyps",
+                        "step_no": 1,
+                        "sub_step_no": 2,
+                        "sl_no": 2,
+                        "step_title": "Learn the basics",
+                        "sub_step_title": "Things to Know in C++/Java/Python or any language",
+                        "question_title": "Data Types",
+                        "post_link": null,
+                        "yt_link": "https://youtu.be/EAR7De6Goz4?t=755",
+                        "gfg_link": "https://bit.ly/3Dqmgvx",
+                        "cs_link": "https://www.codingninjas.com/studio/problems/data-type_8357232?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf",
+                        "lc_link": null,
+                        "company_tags": null,
+                        "difficulty": 0,
+                        "ques_topic": "[{\"value\":\"basics\",\"label\":\"Introduction to DSA\"}]"
+                    }
+                ]
+            }
+        ]
+    }
+]
