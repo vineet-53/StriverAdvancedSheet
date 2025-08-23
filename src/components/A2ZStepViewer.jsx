@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ChevronDown, ChevronRight, Youtube, Star } from "lucide-react";
+import { useTheme } from "../hooks/useTheme";
 
 // ✅ StepsViewer is now modular
-export default function StepsViewer({ sheetId, jsonPath }) {
+export default function A2ZStepViewer({ sheetId, jsonPath }) {
+  const { theme } = useTheme();
   const [data, setData] = useState([]);
   const [openSteps, setOpenSteps] = useState({});
   const [openSubs, setOpenSubs] = useState({});
@@ -16,7 +18,7 @@ export default function StepsViewer({ sheetId, jsonPath }) {
     // load sheet json dynamically
     /* @vite-ignore */
     import(`${jsonPath}`).then((module) => setData(module.default));
-
+    console.log(sheetId , jsonPath)
     // load progress
     const stored = JSON.parse(localStorage.getItem(storageKey)) || {};
     setDone(stored);
@@ -51,14 +53,17 @@ export default function StepsViewer({ sheetId, jsonPath }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
+    <div className={`min-h-screen bg-gradient-to-br ${theme.colors.primary} text-white`}>
       <div className="container mx-auto px-6 py-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 bg-clip-text text-transparent mb-3">
-            📚 {sheetId.toUpperCase()} Progress Tracker
+          <h1 className={`text-4xl font-bold  mb-3`}>
+            📚 
+            <span className={`bg-gradient-to-r ${theme.colors.secondary} bg-clip-text text-transparent`}>
+              {sheetId.toUpperCase()} Progress Tracker
+              </span>
           </h1>
-          <p className="text-gray-300 text-lg">
+          <p className={`${theme.colors.textSecondary} text-lg`}>
             Track your progress through each step and sub-step
           </p>
         </div>
@@ -67,18 +72,18 @@ export default function StepsViewer({ sheetId, jsonPath }) {
           <div key={step.step_no} className="mb-6">
             {/* Step */}
             <div
-              className="flex items-center justify-between bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl border border-gray-700 hover:border-orange-500/50 transition-all duration-300 cursor-pointer hover:shadow-xl hover:shadow-orange-500/20"
+              className={`flex items-center justify-between ${theme.colors.card} backdrop-blur-sm p-6 rounded-2xl border ${theme.colors.border} transition-all duration-300 cursor-pointer hover:shadow-xl`}
               onClick={() => toggleStep(step.step_no)}
             >
-              <h2 className="text-xl font-semibold text-white">
+              <h2 className={`text-xl font-semibold ${theme.colors.text}`}>
                 Step {step.step_no}: {step.step_title}
               </h2>
               <div className="flex items-center gap-3">
-                <span className="text-gray-300 text-sm">Click to expand</span>
+                <span className={`${theme.colors.textSecondary} text-sm`}>Click to expand</span>
                 {openSteps[step.step_no] ? (
-                  <ChevronDown className="text-orange-400" size={24} />
+                  <ChevronDown className={theme.colors.accentColor} size={24} />
                 ) : (
-                  <ChevronRight className="text-orange-400" size={24} />
+                  <ChevronRight className={theme.colors.accentColor} size={24} />
                 )}
               </div>
             </div>
@@ -88,14 +93,14 @@ export default function StepsViewer({ sheetId, jsonPath }) {
               step.sub_steps.map((sub) => (
                 <div key={sub.sub_step_no} className="ml-8 mt-4">
                   <div
-                    className="flex items-center justify-between bg-gray-700/80 backdrop-blur-sm p-4 rounded-xl border border-gray-700 hover:border-orange-500/50 transition-all duration-300 cursor-pointer hover:shadow-lg hover:shadow-orange-500/20"
+                    className={`flex items-center justify-between ${theme.colors.cardHover} backdrop-blur-sm p-4 rounded-xl border ${theme.colors.border} transition-all duration-300 cursor-pointer hover:shadow-lg`}
                     onClick={() => toggleSubStep(sub.sub_step_no)}
                   >
-                    <h3 className="text-lg font-medium text-white">
+                    <h3 className={`text-lg font-medium ${theme.colors.text}`}>
                       Lec {sub.sub_step_no}: {sub.sub_step_title}
                     </h3>
                     <div className="flex items-center gap-2">
-                      <span className="text-gray-400 text-sm">Expand topics</span>
+                      <span className={`${theme.colors.textMuted} text-sm`}>Expand topics</span>
                       {openSubs[sub.sub_step_no] ? (
                         <ChevronDown className="text-blue-400" size={20} />
                       ) : (
@@ -106,35 +111,35 @@ export default function StepsViewer({ sheetId, jsonPath }) {
 
                                      {/* Topics */}
                    {openSubs[sub.sub_step_no] && (
-                     <div className="mt-4 ml-4 bg-gray-700/80 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden">
+                     <div className={`mt-4 ml-4 ${theme.colors.cardHover} backdrop-blur-sm rounded-xl border ${theme.colors.border} overflow-hidden`}>
                        <div className="overflow-x-auto">
                          <table className="w-full text-left">
-                           <thead className="bg-gray-800/80 border-b border-gray-700">
+                           <thead className={`${theme.colors.card} border-b ${theme.colors.border}`}>
                              <tr>
-                               <th className="p-4 text-gray-300 font-semibold">Status</th>
-                               <th className="p-4 text-gray-300 font-semibold">Problem</th>
-                               <th className="p-4 text-gray-300 font-semibold">Post</th>
-                               <th className="p-4 text-gray-300 font-semibold">YouTube</th>
-                               <th className="p-4 text-gray-300 font-semibold">GFG</th>
-                               <th className="p-4 text-gray-300 font-semibold">LeetCode</th>
-                               <th className="p-4 text-gray-300 font-semibold">Coding Ninjas</th>
-                               <th className="p-4 text-gray-300 font-semibold">Fav</th>
-                               <th className="p-4 text-gray-300 font-semibold">Difficulty</th>
+                               <th className={`p-4 ${theme.colors.textSecondary} font-semibold`}>Status</th>
+                               <th className={`p-4 ${theme.colors.textSecondary} font-semibold`}>Problem</th>
+                               <th className={`p-4 ${theme.colors.textSecondary} font-semibold`}>Post</th>
+                               <th className={`p-4 ${theme.colors.textSecondary} font-semibold`}>YouTube</th>
+                               <th className={`p-4 ${theme.colors.textSecondary} font-semibold`}>GFG</th>
+                               <th className={`p-4 ${theme.colors.textSecondary} font-semibold`}>LeetCode</th>
+                               <th className={`p-4 ${theme.colors.textSecondary} font-semibold`}>Coding Ninjas</th>
+                               <th className={`p-4 ${theme.colors.textSecondary} font-semibold`}>Fav</th>
+                               <th className={`p-4 ${theme.colors.textSecondary} font-semibold`}>Difficulty</th>
                              </tr>
                            </thead>
                            <tbody>
                              {sub.topics.map((topic) => (
-                               <tr key={topic.id} className="border-b border-gray-700 hover:bg-gray-700/80 transition-colors duration-200">
+                               <tr key={topic.id} className={`border-b ${theme.colors.border} transition-colors duration-200`}>
                                                                  <td className="p-4">
                                    <input
                                      type="checkbox"
                                      checked={!!done[topic.id]}
                                      onChange={() => toggleDone(topic.id)}
-                                     className="w-5 h-5 text-orange-500 bg-gray-700 border-gray-600 rounded focus:ring-orange-500 focus:ring-2"
+                                     className={`w-5 h-5 ${theme.colors.checkbox} bg-gray-700 border-gray-600 rounded ${theme.colors.checkboxFocus} focus:ring-2`}
                                    />
                                  </td>
                                  <td className="p-4">
-                                   <span className="text-orange-300 cursor-pointer hover:text-orange-200 transition-colors duration-200 font-medium">
+                                   <span className={`${theme.colors.link} cursor-pointer hover:${theme.colors.linkHover} transition-colors duration-200 font-medium`}>
                                      {topic.question_title}
                                    </span>
                                  </td>
@@ -144,7 +149,7 @@ export default function StepsViewer({ sheetId, jsonPath }) {
                                        href={topic.post_link}
                                        target="_blank"
                                        rel="noopener noreferrer"
-                                       className="inline-flex items-center px-3 py-1 bg-blue-500/20 text-blue-300 border-blue-500/30 rounded-lg hover:bg-blue-500/30 hover:border-blue-500/50 transition-all duration-200 border"
+                                       className={`inline-flex items-center px-3 py-1 ${theme.colors.solve} rounded-lg hover:${theme.colors.solveHover} transition-all duration-200 border hover:${theme.colors.solveHover}`}
                                      >
                                        Solve
                                      </a>
@@ -158,7 +163,7 @@ export default function StepsViewer({ sheetId, jsonPath }) {
                                        href={topic.yt_link}
                                        target="_blank"
                                        rel="noopener noreferrer"
-                                       className="inline-flex items-center justify-center w-8 h-8 bg-red-500/20 text-red-400 border-red-500/30 rounded-lg hover:bg-red-500/30 hover:border-red-500/50 transition-all duration-200 border"
+                                       className={`inline-flex items-center justify-center w-8 h-8 ${theme.colors.youtube} rounded-lg hover:${theme.colors.youtubeHover} transition-all duration-200 border hover:${theme.colors.youtubeHover}`}
                                      >
                                        <Youtube size={16} />
                                      </a>
@@ -220,8 +225,8 @@ export default function StepsViewer({ sheetId, jsonPath }) {
                                        size={22}
                                        className={
                                          favorites[topic.id]
-                                           ? "text-yellow-400 fill-current drop-shadow-lg"
-                                           : "text-slate-500 hover:text-yellow-300"
+                                           ? `${theme.colors.star} fill-current drop-shadow-lg`
+                                           : `text-slate-500 hover:${theme.colors.starHover}`
                                        }
                                      />
                                    </button>
