@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ChevronDown, ChevronRight, Youtube, Star } from "lucide-react";
 import { useTheme } from "../hooks/useTheme";
 
-export default function A2ZStepViewer({ sheetId  , jsonPath}) {
+export default function A2ZStepViewer({ sheetId  , jsonPath , sheetData}) {
   const { theme } = useTheme();
 
   // Only allow rendering if sheetId is 'a2z'
@@ -25,11 +25,9 @@ export default function A2ZStepViewer({ sheetId  , jsonPath}) {
   const storageKey = `done_questions_${sheetId}`;
 
   useEffect(() => {
-    import(`${jsonPath}`).then((module) => { 
-      setData(module.default)
-    });
     const stored = JSON.parse(localStorage.getItem(storageKey)) || {};
     setDone(stored);
+    setData(sheetData)
   }, [sheetId, jsonPath]);
 
   const toggleStep = (id) =>

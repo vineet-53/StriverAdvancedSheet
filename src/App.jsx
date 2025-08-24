@@ -3,10 +3,11 @@ import { Routes, Route, Link } from "react-router-dom";
 import A2ZStepViewer from "./components/A2ZStepViewer.jsx";
 import Import from "./components/Import.jsx";
 import ThemeToggle from "./components/ThemeToggle.jsx";
+import { sheet as a2zSheet } from "./sheets/a2z.js";
 import { ThemeProvider, useTheme } from "./hooks/useTheme";
 
 const sheets = [
-  { id: "a2z", name: "A2Z Sheet", file: `../sheets/a2z.json` },
+  { id: "a2z", name: "A2Z Sheet", file: `../sheets/a2z.js` },
 ];
 
 // need to make different component to render these files
@@ -37,6 +38,7 @@ const App = () => {
                 <A2ZStepViewer
                   sheetId={sheet.id}
                   jsonPath={sheet.file}
+                  sheetData={a2zSheet}
                 />
               }
             />
