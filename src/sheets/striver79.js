@@ -1,4 +1,4 @@
-[
+export const strverSheet =  [
         {
             "step_no": 1,
             "head_step_no": "Arrays and Hashing",

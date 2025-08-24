@@ -1,19 +1,23 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import {strverSheet} from "./sheets/striver79.js";
+import {sdeSheet} from "./sheets/sde.js";
+import {blindSheet} from "./sheets/blind75.js";
 import A2ZStepViewer from "./components/A2ZStepViewer.jsx";
+import { Routes, Route, Link } from "react-router-dom";
 import Import from "./components/Import.jsx";
 import ThemeToggle from "./components/ThemeToggle.jsx";
 import { sheet as a2zSheet } from "./sheets/a2z.js";
 import { ThemeProvider, useTheme } from "./hooks/useTheme";
+import StriverStepViewer from "./components/StriverStepViewer.jsx";
 
+const sheets2 = [
+  { id: "sde", name: "SDE Sheet", file: "../sheets/sde_sheet.json" },
+  { id: "striver79", name: "Striver 79 sheet", file: "../sheets/striver79.json" },
+  { id: "blind75", name: "Blind 75 Sheet", file: "../sheets/blind75.json" },
+]
 const sheets = [
   { id: "a2z", name: "A2Z Sheet", file: `../sheets/a2z.js` },
 ];
-
-// need to make different component to render these files
-// { id: "sde", name: "SDE Sheet", file: "../sheets/sde_sheet.json" },
-// { id: "striver79", name: "Striver 79 sheet", file: "../sheets/striver79.json" },
-// { id: "blind75", name: "Blind 75 Sheet", file: "../sheets/blind75.json" },
 
 const Home = () => {
   return (
@@ -53,6 +57,40 @@ const App = () => {
               />
             </>
           ))}
+
+          <Route
+            key={"striver79"}
+            path={`/sheet/striver79`}
+            element={
+              <StriverStepViewer
+                sheetId={"striver79"}
+                sheetData={strverSheet}
+              />
+            }
+          />
+
+        <Route
+          key={"blind75"}
+          path={`/sheet/blind75`}
+          element={
+            <StriverStepViewer
+              sheetId={"blind75"}
+              sheetData={blindSheet}
+            />
+          }
+        />
+
+        <Route
+          key={"sde"}
+          path={`/sheet/sde`}
+          element={
+            <StriverStepViewer
+              sheetId={"sde"}
+              sheetData={sdeSheet}
+            />
+          }
+        />
+
         </Routes>
       </div>
     </ThemeProvider>
@@ -80,6 +118,32 @@ const HomeContent = () => {
 
         <div className="max-w-4xl mx-auto space-y-6">
           {sheets.map((sheet) => (
+            <div key={sheet.id} className={`${theme.colors.card} backdrop-blur-sm rounded-2xl p-6 border ${theme.colors.border} transition-all duration-300 hover:shadow-2xl`}>
+              <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+                <div className="text-center sm:text-left">
+                  <h3 className={`text-xl font-semibold ${theme.colors.text} mb-2`}>{sheet.name}</h3>
+                  <p className={`${theme.colors.textSecondary} text-sm`}>Practice problems and track your progress</p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Link
+                    to={`/sheet/${sheet.id}`}
+                    className={`px-8 py-3 bg-gradient-to-r ${theme.colors.button} rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center min-w-[140px]`}
+                  >
+                    <span className="mr-2">🚀</span>
+                    View Sheet
+                  </Link>
+                  <Link
+                    to={`/sheet/${sheet.id}/import`}
+                    className="px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 flex items-center justify-center min-w-[140px]"
+                  >
+                    <span className="mr-2">📥</span>
+                    Import
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+          {sheets2.map((sheet) => (
             <div key={sheet.id} className={`${theme.colors.card} backdrop-blur-sm rounded-2xl p-6 border ${theme.colors.border} transition-all duration-300 hover:shadow-2xl`}>
               <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
                 <div className="text-center sm:text-left">
