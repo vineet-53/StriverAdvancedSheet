@@ -2,24 +2,32 @@ import React, { useEffect, useState } from "react";
 import { ChevronDown, ChevronRight, Youtube, Star } from "lucide-react";
 import { useTheme } from "../hooks/useTheme";
 
-// ✅ StepsViewer is now modular
-export default function A2ZStepViewer({ sheetId, jsonPath }) {
+export default function A2ZStepViewer({ sheetId  , jsonPath}) {
   const { theme } = useTheme();
+
+  // Only allow rendering if sheetId is 'a2z'
+  if (sheetId !== "a2z") {
+    return (
+      <div
+        className={`min-h-screen flex items-center justify-center bg-gradient-to-br ${theme.colors.primary} text-white`}
+      >
+        <p className="text-xl">This viewer is only available for the A2Z sheet.</p>
+      </div>
+    );
+  }
+
   const [data, setData] = useState([]);
   const [openSteps, setOpenSteps] = useState({});
   const [openSubs, setOpenSubs] = useState({});
   const [favorites, setFavorites] = useState({});
   const [done, setDone] = useState({});
 
-  // ✅ Each sheet gets its own localStorage key
   const storageKey = `done_questions_${sheetId}`;
 
   useEffect(() => {
-    // load sheet json dynamically
-    /* @vite-ignore */
-    import(`${jsonPath}`).then((module) => setData(module.default));
-    console.log(sheetId , jsonPath)
-    // load progress
+    import(`${jsonPath}`).then((module) => { 
+      setData(module.default)
+    });
     const stored = JSON.parse(localStorage.getItem(storageKey)) || {};
     setDone(stored);
   }, [sheetId, jsonPath]);

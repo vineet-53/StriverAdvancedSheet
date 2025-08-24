@@ -6,12 +6,13 @@ import ThemeToggle from "./components/ThemeToggle.jsx";
 import { ThemeProvider, useTheme } from "./hooks/useTheme";
 
 const sheets = [
-  { id: "a2z", name: "A2Z Sheet", file: "../sheets/a2z_sheet.json" },
-  // need to make different component to render these files
-  // { id: "sde", name: "SDE Sheet", file: "../sheets/sde_sheet.json" },
-  // { id: "striver79", name: "Striver 79 sheet", file: "../sheets/striver79.json" },
-  // { id: "blind75", name: "Blind 75 Sheet", file: "../sheets/blind75.json" },
+  { id: "a2z", name: "A2Z Sheet", file: `../sheets/a2z.json` },
 ];
+
+// need to make different component to render these files
+// { id: "sde", name: "SDE Sheet", file: "../sheets/sde_sheet.json" },
+// { id: "striver79", name: "Striver 79 sheet", file: "../sheets/striver79.json" },
+// { id: "blind75", name: "Blind 75 Sheet", file: "../sheets/blind75.json" },
 
 const Home = () => {
   return (
