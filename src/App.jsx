@@ -19,6 +19,13 @@ const sheets = [
   { id: "a2z", name: "A2Z Sheet", file: `../sheets/a2z.js` },
 ];
 
+const importRoutes = [
+  { id: "a2z", name: "A2Z Sheet"},
+  { id: "sde", name: "SDE Sheet"},
+  { id: "striver79", name: "Striver 79 sheet"},
+  { id: "blind75", name: "Blind 75 Sheet"}
+];
+
 const Home = () => {
   return (
     <HomeContent />
@@ -48,7 +55,7 @@ const App = () => {
             />
           ))}
 
-          {sheets.map((sheet) => (
+          {importRoutes.map((sheet) => (
             <>
               <Route
                 key={sheet.id + "_import"}
